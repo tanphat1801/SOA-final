@@ -1,0 +1,141 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<h2 class='mb-3'>Bảng phân công</h2>
+<section class='p-4 shadow rounded mb-4'>
+    <h4>Khối 12</h4>
+    <hr />
+    <table class='display table_id'>
+        <thead>
+            <tr>
+                <th>Lớp</th>
+                {{#each subjects}}
+                    <th>{{name}}</th>
+                {{/each}}
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each classes}}
+                {{#equal grade 12}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#each sheets}}
+                    <td class="text-center">{{teacher.name}}<br>{{shift}}</td>
+                    {{/each}}
+                    <td>
+                        <a
+                            href='sheet/{{_id}}'
+                            class="h5"
+                        >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{/equal}}
+            {{/each}}
+        </tbody>
+    </table>
+
+    <h4 class="mt-4">Khối 11</h4>
+    <hr />
+    <table class='display table_id'>
+        <thead>
+            <tr>
+                <th>Lớp</th>
+                {{#each subjects}}
+                    <th>{{name}}</th>
+                {{/each}}
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each classes}}
+                {{#equal grade 11}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#each sheets}}
+                    <td>{{teacher.name}}<br>{{shift}}</td>
+                    {{/each}}
+                    <td>
+                        <a
+                            href='sheet/{{_id}}'
+                            class="h5"
+                        >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{/equal}}
+            {{/each}}
+        </tbody>
+    </table>
+
+    <h4 class="mt-4">Khối 10</h4>
+    <hr />
+    <table class='display table_id'>
+        <thead>
+            <tr>
+                <th>Lớp</th>
+                {{#each subjects}}
+                    <th>{{name}}</th>
+                {{/each}}
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each classes}}
+                {{#equal grade 10}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#each sheets}}
+                    <td>{{teacher.name}}<br>{{shift}}</td>
+                    {{/each}}
+                    <td>
+                        <a
+                            href='sheet/{{_id}}'
+                            class="h5"
+                        >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+                {{/equal}}
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+
+<script>
+    $(document).ready( function () { $('.table_id').DataTable(); } );
+</script>

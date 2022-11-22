@@ -1,0 +1,282 @@
+<div class='shadow p-4 mb-4 rounded'>
+    <h3 class='text-center mb-3'>Buổi sáng</h3>
+    <p>Học kì: {{timetable.term}}</p>
+    <p class='text-muted'><span class='text-danger'>*</span>
+        Thời gian có hiệu lực từ ngày
+        <strong>{{timetable.expire}}</strong>
+        đến ngày
+        <strong>{{timetable.createdAt}}</strong></p>
+    <div class='table-responsive'>
+        <table class='table table-bordered text-center'>
+            <thead>
+                <tr class='text-white bg-info'>
+                    <th class='text-uppercase'>Thời gian</th>
+                    <th class='text-uppercase'>Thứ 2</th>
+                    <th class='text-uppercase'>Thứ 3</th>
+                    <th class='text-uppercase'>Thứ 4</th>
+                    <th class='text-uppercase'>Thứ 5</th>
+                    <th class='text-uppercase'>Thứ 6</th>
+                    <th class='text-uppercase'>Thứ 7</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='align-middle'>Tiết 1<br />7:00 - 7:45</td>
+                    {{#with timetable.monday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.tuesday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.wednesday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.thursday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.friday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.saturday.[0]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 2<br />7:50 - 8:35</td>
+                    {{#with timetable.monday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.tuesday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.wednesday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.thursday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.friday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.saturday.[1]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 3<br />8:55 - 9:40</td>
+                    {{#with timetable.monday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.tuesday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.wednesday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.thursday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.friday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.saturday.[2]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 4<br />9:45 - 10:30</td>
+                    {{#with timetable.monday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.tuesday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.wednesday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.thursday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.friday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.saturday.[3]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                </tr>
+
+                <tr>
+                    <td class='align-middle'>Tiết 5<br />10:35 - 11:20</td>
+                    {{#with timetable.monday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.tuesday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.wednesday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.thursday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.friday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                    {{#with timetable.saturday.[4]}}
+                        <td>
+                            <strong>{{subject}}</strong>
+                            <div
+                                class='font-size13 text-light-gray'
+                            >{{teacher}}</div>
+                        </td>
+                    {{/with}}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

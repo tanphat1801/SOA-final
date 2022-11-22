@@ -1,0 +1,30 @@
+<h2 class='mb-3'>{{class.name}}</h2>
+<section class='shadow rounded p-4'>
+    <form method='post' class='mb-0'>
+        {{#each class.sheets}}
+            <input type="hidden" name="_id" value="{{_id}}">
+            <input type="hidden" name="subject" value="{{subject._id}}">
+            <label class='form-label bold' for='desc'>{{subject.name}}</label>
+            <div class='input-group mb-4'>
+                <div class='input-group-prepend'>
+                    <span class='input-group-text'>Giáo viên - số tiết dạy</span>
+                </div>
+                <select name='teacher' class='form-control'>
+                    {{#each subject.teachers}}
+                        <option value='{{_id}}'>{{name}}</option>
+                    {{/each}}
+                </select>
+                <input
+                    type='number'
+                    name='shift'
+                    class='form-control'
+                    min='1'
+                    value='{{shift}}'
+                />
+            </div>
+        {{/each}}
+        <a href='javascript:history.back()' class='btn btn-secondary me-2'>Trở
+            lại</a>
+        <button type='submit' class='btn btn-primary'>Cập nhật</button>
+    </form>
+</section>

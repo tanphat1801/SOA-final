@@ -1,0 +1,121 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<h2 class='mb-3'>Danh sách lớp học</h2>
+<section class='p-4 shadow rounded'>
+    <a 
+        href="#"
+        class='btn btn-success'
+        data-mdb-toggle='modal'
+		data-mdb-target='#createModal'
+    >Thêm lớp</a>
+    <hr>
+    <table id='table_id' class='display'>
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Khối</th>
+                <th>Tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each classes}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{grade}}</td>
+                <td>{{account.username}}</td>
+                <td>{{account.password}}</td>
+                <td>
+                    <form action="class/delete" method="post">
+                        <input type="hidden" name="id" value="{{_id}}">
+                        <button type="submit"
+                            class="btn btn-danger"
+                        >
+                        Xoá
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody
+    </table>
+</section>
+
+<!-- Modal -->
+<div
+	class='modal fade'
+	id='createModal'
+	tabindex='-1'
+	aria-labelledby='exampleModalLabel'
+	aria-hidden='true'
+>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<h5 class='modal-title' id='exampleModalLabel'>Thêm lớp học</h5>
+				<button
+					type='button'
+					class='btn-close'
+					data-mdb-dismiss='modal'
+					aria-label='Close'
+				></button>
+			</div>
+			<form method='post' action='class/create' class='mb-0'>
+				<div class='modal-body'>
+					<div class='form-outline mb-4'>
+						<input type='text' name='name' class='form-control' />
+						<label class='form-label' for='desc'>Tên<span class='text-danger'> *</span></label>
+					</div>
+					<div class='form-outline mb-4'>
+						<input type='number' min="10" max="12" name='grade' class='form-control' />
+						<label class='form-label' for='answer'>Khối<span class='text-danger'> *</span></label>
+					</div>
+				</div>
+				<div class='modal-footer'>
+					<button
+						type='button'
+						class='btn btn-secondary'
+						data-mdb-dismiss='modal'
+					>Đóng</button>
+					<button type='submit' class='btn btn-primary'>Thêm</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+    $(document).ready( function () { $('#table_id').DataTable(); } );
+</script>

@@ -1,0 +1,71 @@
+<div class='shadow p-4 mb-4 rounded'>
+    <h3 class='text-center mb-3'>Buổi sáng</h3>
+    <p>Học kì: {{timetable.term}}</p>
+    <p class='text-muted'><span class='text-danger'>*</span>
+        Thời gian có hiệu lực từ ngày
+        <strong>{{timetable.expire}}</strong>
+        đến ngày
+        <strong>{{timetable.createdAt}}</strong></p>
+    <div class='table-responsive'>
+        <table class='table table-bordered text-center'>
+            <thead>
+                <tr class='text-white bg-info'>
+                    <th class='text-uppercase'>Thời gian</th>
+                    <th class='text-uppercase'>Thứ 2</th>
+                    <th class='text-uppercase'>Thứ 3</th>
+                    <th class='text-uppercase'>Thứ 4</th>
+                    <th class='text-uppercase'>Thứ 5</th>
+                    <th class='text-uppercase'>Thứ 6</th>
+                    <th class='text-uppercase'>Thứ 7</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class='align-middle'>Tiết 1<br />7:00 - 7:45</td>
+                    <td>{{timetable.monday.[0]}}</td>
+                    <td>{{timetable.tuesday.[0]}}</td>
+                    <td>{{timetable.wednesday.[0]}}</td>
+                    <td>{{timetable.thursday.[0]}}</td>
+                    <td>{{timetable.friday.[0]}}</td>
+                    <td>{{timetable.saturday.[0]}}</td>
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 2<br />7:50 - 8:35</td>
+                    <td>{{timetable.monday.[1]}}</td>
+                    <td>{{timetable.tuesday.[1]}}</td>
+                    <td>{{timetable.wednesday.[1]}}</td>
+                    <td>{{timetable.thursday.[1]}}</td>
+                    <td>{{timetable.friday.[1]}}</td>
+                    <td>{{timetable.saturday.[1]}}</td>
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 3<br />8:55 - 9:40</td>
+                    <td>{{timetable.monday.[2]}}</td>
+                    <td>{{timetable.tuesday.[2]}}</td>
+                    <td>{{timetable.wednesday.[2]}}</td>
+                    <td>{{timetable.thursday.[2]}}</td>
+                    <td>{{timetable.friday.[2]}}</td>
+                    <td>{{timetable.saturday.[2]}}</td>
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 4<br />9:45 - 10:30</td>
+                    <td>{{timetable.monday.[3]}}</td>
+                    <td>{{timetable.tuesday.[3]}}</td>
+                    <td>{{timetable.wednesday.[3]}}</td>
+                    <td>{{timetable.thursday.[3]}}</td>
+                    <td>{{timetable.friday.[3]}}</td>
+                    <td>{{timetable.saturday.[3]}}</td>
+                </tr>
+                <tr>
+                    <td class='align-middle'>Tiết 5<br />10:35 - 11:20</td>
+                    <td>{{timetable.monday.[4]}}</td>
+                    <td>{{timetable.tuesday.[4]}}</td>
+                    <td>{{timetable.wednesday.[4]}}</td>
+                    <td>{{timetable.thursday.[4]}}</td>
+                    <td>{{timetable.friday.[4]}}</td>
+                    <td>{{timetable.saturday.[4]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

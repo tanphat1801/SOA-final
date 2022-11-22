@@ -1,0 +1,232 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<div class='d-flex'>
+    <h2 class='mb-3 me-auto'>Thời khoá biểu tổng quát</h2>
+    <a
+        href='#'
+        class='btn btn-success'
+        data-mdb-toggle='modal'
+        data-mdb-target='#createModal'
+        style='height:fit-content'
+    >Tạo TKB</a>
+</div>
+<section class='shadow p-4 rounded'>
+    {{#with classes.[0].timetable}}
+    <p>Học kì: {{term}}</p>
+    <p class='text-muted'><span class='text-danger'>*</span>
+        Thời gian có hiệu lực từ ngày
+        <strong>{{expire}}</strong>
+        đến ngày
+        <strong>{{createdAt}}</strong></p>
+    {{/with}}
+    <table class='table table-bordered rounded text-center'>
+        <thead class='table-secondary'>
+            <tr>
+                <td>Thứ</td>
+                <td>Tiết</td>
+                {{#each classes}}
+                    <td>{{name}}</td>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan='6' style="border-bottom: 2px solid">Thứ 2</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.monday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+            <tr style="border-bottom: 2px solid ">
+                <td rowspan='6' style="border-bottom: 2px solid">Thứ 3</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.tuesday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+            <tr style="border-bottom: 2px solid ">
+                <td rowspan='6' style="border-bottom: 2px solid">Thứ 4</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.wednesday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+            <tr style="border-bottom: 2px solid ">
+                <td rowspan='6' style="border-bottom: 2px solid">Thứ 5</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.thursday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+            <tr style="border-bottom: 2px solid ">
+                <td rowspan='6' style="border-bottom: 2px solid">Thứ 6</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.friday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+            <tr style="border-bottom: 2px solid">
+                <td rowspan='6'>Thứ 7</td>
+                {{#for 5}}
+                    <tr>
+                        <td>Tiết {{this}}</td>
+                        {{#each ../classes}}
+                            {{#with (lookup timetable.saturday (formatIndex ../this))}}
+                                <td>
+                                    <strong>{{subject}}</strong>
+                                    <span
+                                        class='font-size13 text-light-gray'
+                                    > / {{teacher}}</span>
+                                </td>
+                            {{/with}}
+                        {{/each}}
+                    </tr>
+                {{/for}}
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Modal -->
+<div
+    class='modal fade'
+    id='createModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Tạo thời khoá
+                    biểu</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='admin/timetable/create' class='mb-0'>
+                <div class='modal-body'>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='term'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='desc'>Học kì/niên khoá<span
+                                class='text-danger'
+                            > *</span></label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='date'
+                            name='expire'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='desc'>Ngày hết hạn<span
+                                class='text-danger'
+                            > *</span></label>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Tạo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
