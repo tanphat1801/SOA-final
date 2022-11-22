@@ -9,7 +9,10 @@
 1. admin
     username: admin@gmail.com
     password: admin
-2. user
-    username: tanphat200265@gmail.com
-    password: 123
+2. lớp học
+    username: 12a1
+    password: HB7i1Z
+3. giáo viên
+    username: anh
+    password: 76kPfs
     
