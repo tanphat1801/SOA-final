@@ -28,7 +28,6 @@ app.engine(
                 var accum = '';
                 for (var i = 1; i <= n; ++i) {
                     accum += block.fn(i);
-                    console.log(block);
                 }
                 return accum;
             },

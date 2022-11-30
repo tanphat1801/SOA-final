@@ -3,24 +3,12 @@ const { classService, teacherService, subjectService } = require('../services');
 
 const sheetController = {
     index: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
         const classes = await classService.get(
             {},
             '-account -__v',
             'sheets.subject sheets.teacher'
         );
-        const subjects = await subjectService.get({});
-        res.render('admin/sheet', {
-            title: 'Danh sách giáo viên',
-            layout: 'admin',
-            message,
-            classes,
-            subjects,
-            user: req.cookies.user,
-        });
+        res.json(classes);
     }),
 
     updateView: catchAsync(async (req, res) => {
@@ -29,7 +17,6 @@ const sheetController = {
             '-account -__v',
             'sheets.subject sheets.teacher'
         );
-        console.log(classObj);
         await Promise.all(
             classObj.sheets.map(async (sheet) => {
                 sheet.subject.teachers = await teacherService.get(
@@ -40,12 +27,7 @@ const sheetController = {
                 );
             })
         );
-        res.render('admin/sheet/update', {
-            title: classObj.name,
-            layout: 'admin',
-            class: classObj,
-            user: req.cookies.user,
-        });
+        res.json(classObj);
     }),
 
     update: catchAsync(async (req, res) => {
@@ -57,15 +39,13 @@ const sheetController = {
                 teacher: req.body.teacher[i],
                 shift: req.body.shift[i],
             });
-        }
+        }   
         await classService
             .update({ _id: req.params.id }, { sheets })
             .catch((err) => {
-                req.flash('error', 'Cập nhật thất bại');
-                return res.redirect('/admin/sheet');
+                return res.status(500).send('Cập nhật thất bại');
             });
-        req.flash('success', 'Cập nhật thành công');
-        res.redirect('/admin/sheet');
+        res.send('Cập nhật thành công');
     }),
 };
 

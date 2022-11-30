@@ -3,40 +3,24 @@ const { subjectService } = require('../services');
 
 const subjectController = {
     index: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
         const subjects = await subjectService.get({});
-        res.render('admin/subject', {
-            title: 'Danh sách môn học',
-            layout: 'admin',
-            message,
-            subjects,
-            user: req.cookies.user,
-        });
+        res.json(subjects);
     }),
 
     create: catchAsync(async (req, res) => {
-        if (!req.body.name) {
-            req.flash('error', 'Thêm môn học thất bại');
-            return res.redirect('back');
-        }
+        if (!req.body.name)
+            return res.status(500).send('Thêm môn học thất bại');
         await subjectService.create({ ...req.body }).catch((err) => {
-            req.flash('error', 'Thêm môn học thất bại');
-            return res.redirect('back');
+            return res.status(500).send('Thêm môn học thất bại');
         });
-        req.flash('success', 'Thêm môn học thành công');
-        res.redirect('back');
+        res.send('Thêm môn học thành công');
     }),
 
     delete: catchAsync(async (req, res) => {
         await subjectService.delete({ _id: req.body.id }).catch((err) => {
-            req.flash('error', 'Xoá môn học thất bại');
-            return res.redirect('back');
+            return res.status(500).send('Xoá môn học thất bại');
         });
-        req.flash('success', 'Xoá môn học thành công');
-        res.redirect('back');
+        res.send('Xoá môn học thành công');
     }),
 };
 

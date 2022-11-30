@@ -18,7 +18,7 @@ const classService = {
     },
 
     update: async (conditions, payloads) => {
-        return await classModel.findOneAndUpdate(conditions, payloads);
+        return await classModel.updateMany(conditions, payloads);
     },
 
     delete: async (conditions) => {

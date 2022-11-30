@@ -3,26 +3,20 @@ const { classService, teacherService } = require('../services');
 
 const clientController = {
     getClassTimeTable: catchAsync(async (req, res) => {
-        const user = req.cookies.user;
         const timetable = (
             await classService.getOne(
-                { account: user._id },
+                { account: req.params.id },
                 'timetable account'
             )
         ).timetable;
         timetable.expire = timetable.expire.toLocaleDateString('vi-VN');
         timetable.createdAt = timetable.createdAt.toLocaleDateString('vi-VN');
-        res.render('client/class', {
-            title: 'Trang chủ',
-            timetable,
-            user: user,
-        });
+        res.json(timetable);
     }),
 
     getTeacherTimeTable: catchAsync(async (req, res) => {
-        const user = req.cookies.user;
         const teacher = await teacherService.getOne(
-            { account: user._id },
+            { account: req.params.id },
             'name'
         );
         const classes = await classService.get({}, 'name timetable');
@@ -49,11 +43,7 @@ const clientController = {
                 });
             });
         });
-        res.render('client/teacher', {
-            title: 'Trang chủ',
-            timetable,
-            user,
-        });
+        res.json(timetable);
     }),
 };
 

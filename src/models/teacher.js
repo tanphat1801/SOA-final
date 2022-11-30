@@ -6,6 +6,7 @@ const Teacher = new Schema({
     account: { type: Schema.Types.ObjectId, ref: 'User' },
     class: { type: Schema.Types.ObjectId, ref: 'Class' },
     subject: { type: Schema.Types.ObjectId, ref: 'Subject' },
+    standardPeriod: Number,
 });
 
 module.exports = model('Teacher', Teacher);

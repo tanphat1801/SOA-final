@@ -54,6 +54,10 @@ const Class = new Schema({
         expire: Date,
         term: String,
         createdAt: Date,
+        isExtra: {
+            type: Boolean,
+            default: false,
+        },
     },
 });
 

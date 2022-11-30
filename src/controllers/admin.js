@@ -13,10 +13,6 @@ function shuffle(array) {
 
 const adminController = {
     index: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
         const classes = await classService.get({}, 'name timetable');
         classes.map((item) => {
             item.timetable.expire =
@@ -24,21 +20,13 @@ const adminController = {
             item.timetable.createdAt =
                 item.timetable.createdAt.toLocaleDateString('vi-VN');
         });
-        res.render('admin/index', {
-            title: 'Thời khoá biểu tổng quát',
-            layout: 'admin',
-            message,
-            classes,
-            user: req.cookies.user,
-        });
+        res.json(classes);
     }),
 
     createTimetable: catchAsync(async (req, res) => {
         const { expire, term } = req.body;
-        if (!expire || !term) {
-            req.flash('error', 'Tạo thất bại');
-            return res.redirect('back');
-        }
+        if (!expire || !term)
+            return res.status(500).send('Dữ liệu không hợp lệ');
         const classes = await classService.get(
             {},
             'sheets name',
@@ -86,12 +74,10 @@ const adminController = {
                     }
                 )
                 .catch((err) => {
-                    req.flash('error', 'Thêm thất bại');
-                    return res.redirect('back');
+                    return res.status(500).send('Tạo thời khoá biểu thất bại');
                 });
         });
-        req.flash('success', 'Tạo thành công');
-        res.redirect('back');
+        res.send('Tạo thời khoá biểu thành công');
     }),
 };
 

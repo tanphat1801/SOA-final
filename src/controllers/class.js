@@ -3,31 +3,19 @@ const { userService, classService, subjectService } = require('../services');
 
 const classController = {
     index: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
+        await classService.update({}, { 'timetable.isExtra': false });
         const classes = await classService.get({}, '', 'account');
-        res.render('admin/class', {
-            title: 'Danh sách lớp học',
-            layout: 'admin',
-            message,
-            classes,
-            user: req.cookies.user,
-        });
+        res.json(classes);
     }),
 
     create: catchAsync(async (req, res) => {
         const { name, grade } = req.body;
-        if (!name || !grade) {
-            req.flash('error', 'Thêm thất bại');
-            return res.redirect('back');
-        }
+        if (!name || !grade)
+            return res.status(500).send('Dữ liệu không hợp lệ');
         const user = await userService
             .create({ name, role: 'class' })
             .catch((err) => {
-                req.flash('error', 'Thêm thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Thêm lớp học thất bại');
             });
         const subjects = await subjectService.get({});
         const array = subjects.map((subject) => ({
@@ -37,25 +25,20 @@ const classController = {
             .create({ ...req.body, sheets: array, account: user._id })
             .catch(async (err) => {
                 await userService.delete({ _id: user._id });
-                req.flash('error', 'Thêm thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Thêm lớp học thất bại');
             });
-        req.flash('success', 'Thêm thành công');
-        res.redirect('back');
+        return res.send('Thêm lớp học thành công');
     }),
 
     delete: catchAsync(async (req, res) => {
         const { id } = req.body;
         const classObj = await classService.delete({ _id: id }).catch((err) => {
-            req.flash('error', 'Xoá thất bại');
-            return res.redirect('back');
+            return res.status(500).send('Xoá lớp học thất bại');
         });
         await userService.delete({ _id: classObj.account }).catch((err) => {
-            req.flash('error', 'Xoá thất bại');
-            return res.redirect('back');
+            return res.status(500).send('Xoá lớp học thất bại');
         });
-        req.flash('success', 'Xoá thành công');
-        res.redirect('back');
+        res.send('Xoá lớp học thành công');
     }),
 };
 

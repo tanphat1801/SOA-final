@@ -30,11 +30,6 @@ const isLoggedIn = async (req) => {
 		) {
 			return false;
 		}
-
-		if (user.status === 'banned') {
-			return false;
-		}
-
 		return { tokenData: { ...data, token }, user };
 	});
 };
@@ -58,10 +53,7 @@ module.exports = catchAsync(async (req, res, next) => {
 	}
 
 	if (isPathForAnonymous) {
-		return res.redirect('/');
+		return res.redirect('/class');
 	}
-
-	res.status(403);
-	req.flash('error', 'Vui lòng đăng nhập.');
-	return res.redirect('/auth/login');
+	res.status(500).send('Vui lòng đăng nhập');
 });

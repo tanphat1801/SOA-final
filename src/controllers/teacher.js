@@ -1,52 +1,24 @@
 const catchAsync = require('../utils/catchAsync');
-const {
-    userService,
-    teacherService,
-    classService,
-    subjectService,
-} = require('../services');
+const { userService, teacherService, classService } = require('../services');
 
 const teacherController = {
     index: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
         const teachers = await teacherService.get(
             {},
             '',
             'account class subject'
         );
-        const subjects = await subjectService.get({});
-        let chosenClasses = await teacherService.get({}, 'class -_id');
-        chosenClasses = chosenClasses.map((item) => {
-            return item.class;
-        });
-        const classes = await classService.get({
-            _id: { $nin: chosenClasses },
-        });
-        res.render('admin/teacher', {
-            title: 'Danh sách giáo viên',
-            layout: 'admin',
-            message,
-            teachers,
-            classes,
-            subjects,
-            user: req.cookies.user,
-        });
+        res.json(teachers);
     }),
 
     create: catchAsync(async (req, res) => {
         const { name, subject } = req.body;
-        if (!name || !subject) {
-            req.flash('error', 'Thêm thất bại');
-            return res.redirect('back');
-        }
+        if (!name || !subject)
+            return res.status(500).send('Thêm giáo viên thất bại');
         const user = await userService
             .create({ name, role: 'teacher' })
             .catch((err) => {
-                req.flash('error', 'Thêm thất bại' + err);
-                return res.redirect('back');
+                return res.status(500).send('Thêm giáo viên thất bại');
             });
         const teacher = await teacherService
             .create({
@@ -56,8 +28,7 @@ const teacherController = {
             })
             .catch(async (err) => {
                 await userService.delete({ _id: user._id });
-                req.flash('error', 'Thêm thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Thêm giáo viên thất bại');
             });
         if (teacher.class) {
             await classService
@@ -71,12 +42,10 @@ const teacherController = {
                 )
                 .catch(async (err) => {
                     await userService.delete({ _id: user._id });
-                    req.flash('error', 'Thêm thất bại' + err);
-                    return res.redirect('back');
+                    return res.status(500).send('Thêm giáo viên thất bại');
                 });
         }
-        req.flash('success', 'Thêm thành công');
-        res.redirect('back');
+        res.send('Thêm giáo viên thành công');
     }),
 
     update: catchAsync(async (req, res) => {
@@ -92,14 +61,12 @@ const teacherController = {
                 }
             )
             .catch((err) => {
-                req.flash('error', 'Cập nhật thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Cập nhật giáo viên thất bại');
             });
         await teacherService
-            .update({ _id: req.body._id }, { class: classId})
+            .update({ _id: req.body._id }, { class: classId })
             .catch((err) => {
-                req.flash('error', 'Cập nhật thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Cập nhật giáo viên thất bại');
             });
         if (classId) {
             await classService
@@ -112,12 +79,10 @@ const teacherController = {
                     }
                 )
                 .catch((err) => {
-                    req.flash('error', 'Cập nhật thất bại');
-                    return res.redirect('back');
+                    return res.status(500).send('Cập nhật giáo viên thất bại');
                 });
         }
-        req.flash('success', 'Cập nhật thành công');
-        res.redirect('back');
+        res.send('Cập nhật giáo viên thành công');
     }),
 
     delete: catchAsync(async (req, res) => {
@@ -125,12 +90,10 @@ const teacherController = {
         const teacher = await teacherService
             .delete({ _id: id })
             .catch((err) => {
-                req.flash('error', 'Xoá thất bại');
-                return res.redirect('back');
+                return res.status(500).send('Xoá giáo viên thất bại');
             });
         await userService.delete({ _id: teacher.account }).catch((err) => {
-            req.flash('error', 'Xoá thất bại');
-            return res.redirect('back');
+            return res.status(500).send('Xoá giáo viên thất bại');
         });
         if (teacher.class) {
             await classService
@@ -143,12 +106,10 @@ const teacherController = {
                     }
                 )
                 .catch((err) => {
-                    req.flash('error', 'Xoá thất bại');
-                    return res.redirect('back');
+                    return res.status(500).send('Xoá giáo viên thất bại');
                 });
         }
-        req.flash('success', 'Xoá thành công');
-        res.redirect('back');
+        res.send('Xoá giáo viên thành công');
     }),
 };
 

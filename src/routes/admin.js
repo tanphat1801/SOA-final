@@ -9,7 +9,6 @@ const sheetRouter = require('./sheet');
 const isAdmin = require('../middlewares/isAdmin');
 
 // Current path: /admin
-router.use(isAdmin);
 router.get('/', adminController.index);
 router.post('/timetable/create', adminController.createTimetable);
 router.use('/class', classRouter);

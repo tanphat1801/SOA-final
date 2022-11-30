@@ -8,7 +8,6 @@ const adminRouter = require('./admin');
 const clientRouter = require('./client');
 
 // Current path: /
-router.use(classifyUser);
 router.use('/auth', authRouter);
 router.use('/admin', adminRouter);
 router.use('/', clientRouter);
